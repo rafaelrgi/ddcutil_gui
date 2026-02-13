@@ -1,0 +1,29 @@
+# --- Binários e Executáveis ---
+ddcutil_gui
+meu_app
+*.exe
+*.out
+*.app
+
+# --- Pastas de Build e Objetos ---
+obj/
+*.o
+*.so
+*.a
+
+# --- Arquivos Gerados (Interface/Recursos) ---
+# Como esses são gerados pelo Blueprint/GResource, não precisam ir para o Git
+window.ui
+resources.c
+
+# --- IDEs e Editores ---
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# --- Logs e Debug ---
+gmon.out
+core
+*.log

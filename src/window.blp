@@ -1,0 +1,28 @@
+using Gtk 4.0;
+
+Box main_box {
+  orientation: vertical;
+  spacing: 10;
+  margin-top: 15;
+  margin-bottom: 15;
+  margin-start: 15;
+  margin-end: 15;
+
+  Label lblValue {
+    label: "50%";
+    halign: center;
+  }
+
+  Scale sldValue {
+    orientation: horizontal;
+    adjustment: Adjustment {
+      lower: 0;
+      upper: 100;
+      value: 50;
+    };
+  }
+
+  Button btnApply {
+    label: "Apply";
+  }
+}
