@@ -55,7 +55,7 @@ make clean
 The project follows a clean separation of concerns:
 - main.cpp: Application entry point.
 - MainWindow.cpp / .hpp: Core UI logic and signal handling.
-- monitor.c / .h: Low-level hardware abstraction layer (C-based ddcutil interaction).
+- monitor.cp / .hpp: Low-level hardware abstraction layer.
 - window.blp: UI layout defined in Blueprint syntax.
 - resources.gresource.xml: Manifest for bundling assets.
 - obj/: Temporary build artifacts and generated files (ignored by Git).
@@ -63,7 +63,7 @@ The project follows a clean separation of concerns:
 
 ## 🛠️ Technical Details
 This project implements modern GTK development standards:
-- Hybrid Architecture: Leverages C++ for high-level UI logic and C for hardware-specific interactions.
+- Leverages C++ for raw power and speed.
 - gtkmm-4.0: Uses the official C++ wrapper for GTK4, ensuring better memory management and OOP patterns.
 - Reactive UI: Signals and callbacks handle real-time synchronization between the slider and labels.
 - Automated Pipeline: A custom Makefile orchestrates the compilation of Blueprint files into UI XML, then into C resources, before the final linking.
