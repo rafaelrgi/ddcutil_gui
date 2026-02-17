@@ -1,29 +1,36 @@
 #ifndef LOADING_HPP
 #define LOADING_HPP
 
+/*
 #include <gtkmm.h>
 
 class Loading
 {
-  Gtk::Button *btn;
+  Gtk::Window *wnd;
+  Gtk::Box *box;
   Glib::RefPtr<Gdk::Surface> surface;
 
 public:
-  Loading(Gtk::Button *b, Glib::RefPtr<Gdk::Surface> s) : btn(b), surface(s)
+  Loading(Gtk::Window *w, Gtk::Box *b, Glib::RefPtr<Gdk::Surface> s) : wnd(w), box(b), surface(s)
   {
-    if (btn)
-      btn->set_sensitive(false);
+    if (wnd)
+      wnd->set_cursor(Gdk::Cursor::create("wait"));
+    if (box)
+      box->set_sensitive(false);
     if (surface)
       surface->set_cursor(Gdk::Cursor::create("wait"));
   }
 
   ~Loading()
   {
-    if (btn)
-      btn->set_sensitive(true);
+    if (wnd)
+      wnd->set_cursor(Gdk::Cursor::create("default"));
+    if (box)
+      box->set_sensitive(true);
     if (surface)
       surface->set_cursor(Gdk::Cursor::create("default"));
   }
 };
+*/
 
 #endif

@@ -12,12 +12,10 @@ RESOURCES_XML = $(SRCDIR)/resources.gresource.xml
 INTERFACE     = $(OBJDIR)/window.ui
 RESOURCES_C   = $(OBJDIR)/resources.c
 
-# Fontes
-SRCS_CPP = $(SRCDIR)/main.cpp $(SRCDIR)/MainWindow.cpp
-SRCS_C   = $(SRCDIR)/monitor.c
-
-# Objetos
-OBJS = $(OBJDIR)/main.o $(OBJDIR)/MainWindow.o $(OBJDIR)/monitor.o $(OBJDIR)/resources.o
+# Fontes (monitor agora é .cpp)
+SRCS_CPP = $(SRCDIR)/main.cpp $(SRCDIR)/MainWindow.cpp $(SRCDIR)/Monitor.cpp
+# Objetos (todos gerados a partir de .cpp ou do recurso .c)
+OBJS = $(OBJDIR)/main.o $(OBJDIR)/MainWindow.o $(OBJDIR)/Monitor.o $(OBJDIR)/resources.o
 
 # Ferramentas
 CC = gcc
@@ -25,7 +23,7 @@ CXX = g++
 BLUEPRINT_COMPILER = blueprint-compiler
 RESOURCE_COMPILER = glib-compile-resources
 
-# Flags (Note que separamos CFLAGS e CXXFLAGS para evitar conflitos)
+# Flags
 GTKMM_FLAGS = `pkg-config --cflags --libs gtkmm-4.0`
 GTK4_FLAGS = `pkg-config --cflags --libs gtk4`
 CXXFLAGS_BASE = -Wall -std=c++17 -I$(SRCDIR)
@@ -38,19 +36,15 @@ all: debug
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-# Linkagem Final
+# Linkagem Final (Usa CXX para linkar objetos C++ e C)
 $(TARGET): $(OBJDIR) $(INTERFACE) $(RESOURCES_C) $(OBJS)
 	$(CXX) $(OBJS) $(GTKMM_FLAGS) -o $(TARGET)
 
-# Compilação C++
+# Compilação C++ (main, MainWindow e Monitor)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	$(CXX) $(CXXFLAGS) `pkg-config --cflags gtkmm-4.0` -c $< -o $@
 
-# Compilação C
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) `pkg-config --cflags gtk4` -c $< -o $@
-
-# Compilação do recurso gerado
+# Compilação do recurso gerado (O recurso gerado é código C puro)
 $(OBJDIR)/resources.o: $(RESOURCES_C)
 	$(CC) $(CFLAGS) `pkg-config --cflags gtk4` -c $< -o $@
 
@@ -84,4 +78,4 @@ clean:
 run: debug
 	./$(TARGET)
 
-.PHONY: all debug release clean compiledb
+.PHONY: all debug release clean compiledb run
