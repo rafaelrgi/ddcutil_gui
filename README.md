@@ -1,4 +1,4 @@
-# 🖥️ DDCUtil Brightness GUI
+# 🖥️ Brightness GUI
 
 A lightweight, modern GTK4 interface to control your monitor's hardware brightness using ddcutil. No more fiddling with physical monitor buttons or clunky OSD menus.
 
